@@ -95,7 +95,7 @@
     </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="/callkaro-app/_expo/static/js/web/index-42eb2839705f654c91d94973c6226c01.js" defer></script>
+  <script src="/callkaro-app/_expo/static/js/web/index-8bcadc38fbc1ae899f9cf8ffaf80f538.js" defer></script>
     <div id="ck-install" hidden role="dialog" aria-label="Install CallKaro">
       <img src="icons/icon-192.png" alt="" />
       <div class="ck-body">
@@ -199,7 +199,7 @@
               document.documentElement.setAttribute('data-offline-ready', '1');
               if (!store('ck_offline_ready')) {
                 store('ck_offline_ready', '1');
-                toast('Saved on this phone. Works without internet.');
+                /* The app shell is cached for fast starts; its data comes from the CallKaro server. */
               }
             }
           });
@@ -239,12 +239,12 @@
           if (isIOS) {
             steps.innerHTML = inAppBrowser
               ? 'Open this page in <b>Safari</b> first, then tap <b>Share</b> ' + shareIcon + ' and choose <b>Add to Home Screen</b>.'
-              : 'Tap <b>&bull;&bull;&bull;</b> &rarr; <b>Share</b> ' + shareIcon + ' &rarr; <b>View More</b> &rarr; <b>Add to Home Screen</b>. (Older iPhones: Share ' + shareIcon + ', then Add to Home Screen.) It then opens full screen and works offline.';
+              : 'Tap <b>&bull;&bull;&bull;</b> &rarr; <b>Share</b> ' + shareIcon + ' &rarr; <b>View More</b> &rarr; <b>Add to Home Screen</b>. (Older iPhones: Share ' + shareIcon + ', then Add to Home Screen.) It then opens full screen like an app.';
             setTimeout(function () { box.hidden = false; }, 1200);
           } else {
             window.addEventListener('beforeinstallprompt', function (e) {
               e.preventDefault();
-              steps.textContent = 'Add it to your home screen. It opens full screen and works offline.';
+              steps.textContent = 'Add it to your home screen. It opens full screen like an app.';
               actions.innerHTML = '';
               var b = document.createElement('button');
               b.textContent = 'Install';
