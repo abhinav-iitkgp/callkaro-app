@@ -201,7 +201,7 @@
           if (isIOS) {
             steps.innerHTML = inAppBrowser
               ? 'Open this page in <b>Safari</b> first, then tap <b>Share</b> ' + shareIcon + ' and choose <b>Add to Home Screen</b>.'
-              : 'Tap <b>Share</b> ' + shareIcon + ' (in Safari it can be under <b>&bull;&bull;&bull;</b>), then <b>Add to Home Screen</b>. It then opens full screen and works offline.';
+              : 'Tap <b>&bull;&bull;&bull;</b> &rarr; <b>Share</b> ' + shareIcon + ' &rarr; <b>View More</b> &rarr; <b>Add to Home Screen</b>. (Older iPhones: Share ' + shareIcon + ', then Add to Home Screen.) It then opens full screen and works offline.';
             setTimeout(function () { box.hidden = false; }, 1200);
           } else {
             window.addEventListener('beforeinstallprompt', function (e) {
