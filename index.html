@@ -107,6 +107,44 @@
     </div>
     <div id="ck-toast" hidden role="status"></div>
     <script>
+      /* This build has no backend of its own. Answer the app's same-origin API calls right here,
+         from the first moment, so nothing a person types (name, number, tasks) leaves the phone.
+         A server set in Profile > Developer lives on another origin and is not touched. */
+      (function () {
+        try {
+          var here = new URL('.', window.location.href);
+          var apiPrefix = here.origin + here.pathname + 'api/';
+          var audioPrefix = apiPrefix + 'audio/';
+          var realFetch = window.fetch.bind(window);
+          window.fetch = function (input, init) {
+            try {
+              var raw = typeof input === 'string' ? input : input && input.url;
+              var url = new URL(raw, window.location.href).href;
+              if (url.indexOf(apiPrefix) === 0 && url.indexOf(audioPrefix) !== 0) {
+                return Promise.resolve(
+                  new Response('{"error":"standalone"}', {
+                    status: 503,
+                    headers: { 'Content-Type': 'application/json' },
+                  })
+                );
+              }
+            } catch (e) {}
+            return realFetch(input, init);
+          };
+          var RealEventSource = window.EventSource;
+          if (RealEventSource) {
+            window.EventSource = function (url, cfg) {
+              var full = new URL(url, window.location.href).href;
+              if (full.indexOf(apiPrefix) !== 0) return new RealEventSource(url, cfg);
+              var fake = { readyState: 2, close: function () {}, onopen: null, onmessage: null, onerror: null };
+              setTimeout(function () { if (fake.onerror) fake.onerror(new Event('error')); }, 0);
+              return fake;
+            };
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script>
       (function () {
         var nav = window.navigator;
         var ua = nav.userAgent || '';
