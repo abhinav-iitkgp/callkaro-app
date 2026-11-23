@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <title>CallKaro</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+<link rel="icon" href="/callkaro-app/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, shrink-to-fit=no" />
+    <meta name="description" content="CallKaro: a personal call assistant that makes the calls you put off and answers the ones you decline." />
+    <meta name="theme-color" content="#FAFAFA" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CallKaro" />
+    <meta name="application-name" content="CallKaro" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CallKaro: your personal call assistant" />
+    <meta property="og:description" content="Makes the calls you put off. Answers the ones you decline. Add it to your home screen and it works offline." />
+    <meta property="og:image" content="https://abhinav-iitkgp.github.io/callkaro-app/icons/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1320x2868.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1206x2622.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1260x2736.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1290x2796.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1179x2556.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1284x2778.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1170x2532.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1125x2436.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1242x2688.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/828x1792.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/750x1334.png" />
+    <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/1242x2208.png" />
+    <style id="ck-pwa">
+      html, body { background: #FAFAFA; overscroll-behavior: none; -webkit-text-size-adjust: 100%; }
+      body { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+      #ck-install {
+        position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        z-index: 2147483000; max-width: 456px; margin: 0 auto;
+        background: #18181B; color: #fff; border-radius: 18px; padding: 14px 14px 14px 14px;
+        box-shadow: 0 12px 40px rgba(0,0,0,.35);
+        font: 500 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        display: flex; gap: 12px; align-items: flex-start;
+      }
+      #ck-install[hidden], #ck-toast[hidden] { display: none; }
+      #ck-install img { width: 44px; height: 44px; border-radius: 11px; flex: none; }
+      #ck-install .ck-body { flex: 1; min-width: 0; }
+      #ck-install .ck-title { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+      #ck-install .ck-steps { color: #D4D4D8; }
+      #ck-install .ck-steps b { color: #fff; font-weight: 600; }
+      #ck-install svg { width: 15px; height: 15px; vertical-align: -2px; }
+      #ck-install .ck-actions { display: flex; gap: 8px; margin-top: 10px; }
+      #ck-install button {
+        font: inherit; font-weight: 600; border: 0; border-radius: 10px; padding: 8px 14px;
+        background: #F66482; color: #fff; cursor: pointer;
+      }
+      #ck-install button.ck-ghost { background: transparent; color: #A1A1AA; padding: 8px 6px; }
+      #ck-install .ck-x {
+        flex: none; background: transparent; color: #A1A1AA; padding: 0 4px; font-size: 22px; line-height: 22px;
+      }
+      #ck-toast {
+        position: fixed; left: 50%; transform: translateX(-50%);
+        top: calc(14px + env(safe-area-inset-top, 0px)); z-index: 2147483001;
+        background: #18181B; color: #fff; border-radius: 999px; padding: 10px 16px; white-space: nowrap;
+        font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        box-shadow: 0 8px 28px rgba(0,0,0,.3); transition: opacity .35s; opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  <script src="/callkaro-app/_expo/static/js/web/index-a0203dc35e7d8fcb5bbbf1e1e70e592f.js" defer></script>
+    <div id="ck-install" hidden role="dialog" aria-label="Install CallKaro">
+      <img src="icons/icon-192.png" alt="" />
+      <div class="ck-body">
+        <div class="ck-title">Install CallKaro</div>
+        <div class="ck-steps" id="ck-steps"></div>
+        <div class="ck-actions" id="ck-actions"></div>
+      </div>
+      <button class="ck-x" id="ck-x" aria-label="Close">&times;</button>
+    </div>
+    <div id="ck-toast" hidden role="status"></div>
+    <script>
+      (function () {
+        var nav = window.navigator;
+        var ua = nav.userAgent || '';
+        var standalone =
+          nav.standalone === true ||
+          (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+        var isIOS = /iPhone|iPad|iPod/.test(ua) || (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1);
+        var inAppBrowser = /FBAN|FBAV|Instagram|Line\/|LinkedInApp|Snapchat|Twitter/i.test(ua);
+
+        function store(k, v) {
+          try {
+            if (v === undefined) return window.localStorage.getItem(k);
+            window.localStorage.setItem(k, v);
+          } catch (e) {}
+          return null;
+        }
+
+        var toastEl = document.getElementById('ck-toast');
+        function toast(msg, ms) {
+          toastEl.textContent = msg;
+          toastEl.hidden = false;
+          toastEl.style.opacity = '1';
+          setTimeout(function () {
+            toastEl.style.opacity = '0';
+            setTimeout(function () { toastEl.hidden = true; }, 400);
+          }, ms || 3200);
+        }
+
+        /* ---------- offline support ---------- */
+        var offlineReady = false;
+        if ('serviceWorker' in nav) {
+          var hadController = !!nav.serviceWorker.controller;
+          var pendingReload = false;
+          nav.serviceWorker.addEventListener('controllerchange', function () {
+            if (!hadController) { hadController = true; return; }
+            // A newer version finished downloading: switch to it the next time the app is brought forward.
+            pendingReload = true;
+            if (document.visibilityState === 'hidden') window.location.reload();
+          });
+          document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState !== 'visible') return;
+            if (pendingReload) { window.location.reload(); return; }
+            nav.serviceWorker.getRegistration().then(function (r) {
+              if (r) r.update().catch(function () {});
+            });
+          });
+          nav.serviceWorker.addEventListener('message', function (e) {
+            var d = e.data || {};
+            if (d.type !== 'status' || offlineReady) return;
+            if (d.cached >= d.total) {
+              offlineReady = true;
+              document.documentElement.setAttribute('data-offline-ready', '1');
+              if (!store('ck_offline_ready')) {
+                store('ck_offline_ready', '1');
+                toast('Saved on this phone. Works without internet.');
+              }
+            }
+          });
+          window.addEventListener('load', function () {
+            nav.serviceWorker
+              .register('sw.js')
+              .then(function () { return nav.serviceWorker.ready; })
+              .then(function (reg) {
+                var tries = 0;
+                (function ask() {
+                  if (offlineReady || tries++ > 40) return;
+                  if (reg.active) reg.active.postMessage({ type: 'status' });
+                  setTimeout(ask, 2500);
+                })();
+              })
+              .catch(function () {});
+          });
+        }
+
+        /* ---------- install hint (only in a browser tab, never inside the installed app) ---------- */
+        var box = document.getElementById('ck-install');
+        var steps = document.getElementById('ck-steps');
+        var actions = document.getElementById('ck-actions');
+        var shareIcon =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+        function hide(remember) {
+          box.hidden = true;
+          if (remember) store('ck_install_dismissed', String(Date.now()));
+        }
+        document.getElementById('ck-x').addEventListener('click', function () { hide(true); });
+        function recentlyDismissed() {
+          var t = parseInt(store('ck_install_dismissed') || '0', 10);
+          return t && Date.now() - t < 3 * 24 * 3600 * 1000;
+        }
+
+        if (!standalone && !recentlyDismissed()) {
+          if (isIOS) {
+            steps.innerHTML = inAppBrowser
+              ? 'Open this page in <b>Safari</b> first, then tap <b>Share</b> ' + shareIcon + ' and choose <b>Add to Home Screen</b>.'
+              : 'Tap <b>Share</b> ' + shareIcon + ' (in Safari it can be under <b>&bull;&bull;&bull;</b>), then <b>Add to Home Screen</b>. It then opens full screen and works offline.';
+            setTimeout(function () { box.hidden = false; }, 1200);
+          } else {
+            window.addEventListener('beforeinstallprompt', function (e) {
+              e.preventDefault();
+              steps.textContent = 'Add it to your home screen. It opens full screen and works offline.';
+              actions.innerHTML = '';
+              var b = document.createElement('button');
+              b.textContent = 'Install';
+              b.addEventListener('click', function () {
+                hide(false);
+                e.prompt();
+              });
+              actions.appendChild(b);
+              box.hidden = false;
+            });
+          }
+        }
+        window.addEventListener('appinstalled', function () { hide(true); });
+      })();
+    </script>
+  </body>
+</html>
